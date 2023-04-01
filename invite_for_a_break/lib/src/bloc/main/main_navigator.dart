@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invite_for_a_break/src/bloc/main/main_cubit.dart';
 import 'package:invite_for_a_break/src/bloc/main/main_state.dart';
+import 'package:invite_for_a_break/src/bloc/profile/profile_cubit.dart';
+import 'package:invite_for_a_break/src/bloc/profile/profile_navigator.dart';
 import 'package:invite_for_a_break/src/bloc/session/session_cubit.dart';
 import 'package:invite_for_a_break/src/repository/homepage_repo.dart';
 import 'package:invite_for_a_break/src/repository/profile_repo.dart';
 import 'package:invite_for_a_break/src/screens/main/home_view.dart';
-import 'package:invite_for_a_break/src/screens/main/profile_view.dart';
 import 'package:invite_for_a_break/src/screens/main/send_request_view.dart';
 import 'package:invite_for_a_break/src/screens/main/view_requests_view.dart';
 
@@ -40,7 +41,9 @@ class MainNavigator extends StatelessWidget {
               child: RepositoryProvider(
                 create: (context) =>
                     ProfileRepo(sessionCubit: context.read<SessionCubit>()),
-                child: ProfileView(null),
+                child: BlocProvider(
+                    create: (context) => ProfileCubit(),
+                    child: ProfileNavigator()),
               ),
             ),
         ],

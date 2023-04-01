@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invite_for_a_break/src/bloc/profile/profile_bloc.dart';
+import 'package:invite_for_a_break/src/bloc/profile/profile_cubit.dart';
 import 'package:invite_for_a_break/src/bloc/profile/profile_event.dart';
 import 'package:invite_for_a_break/src/bloc/profile/profile_state.dart';
 import 'package:invite_for_a_break/src/repository/profile_repo.dart';
+import 'package:invite_for_a_break/src/screens/main/set_timeline.dart';
 
 class ProfileView extends StatelessWidget {
   final int? userId;
-  const ProfileView(id, {Key? key, this.userId}) : super(key: key);
+  const ProfileView({Key? key, this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -178,9 +180,14 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return state.myProfile
-            ? ElevatedButton(
-                onPressed: () {},
-                child: Text("Set Free Time"),
+            ? BlocBuilder<ProfileCubit, ProfileNavState>(
+                builder: (context, state) {
+                  return ElevatedButton(
+                      onPressed: () {
+                        context.read<ProfileCubit>().gotoSetFreeTime();
+                      },
+                      child: Text("Set Free Time"));
+                },
               )
             : ElevatedButton(
                 onPressed: () {},
