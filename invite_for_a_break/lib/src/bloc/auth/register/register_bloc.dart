@@ -32,7 +32,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       emit(state.copyWith(formStatus: FormSubmittingStatus()));
 
       try {
-        final response = await authRepo.register(state.email, state.password);
+        await authRepo.register(state.email, state.password);
         emit(state.copyWith(formStatus: SubmissionSuccessStatus()));
       } catch (e) {
         emit(state.copyWith(

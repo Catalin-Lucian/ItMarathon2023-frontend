@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:invite_for_a_break/config/config.dart';
 import 'package:invite_for_a_break/src/bloc/session/session_cubit.dart';
@@ -52,8 +51,8 @@ class ProfileRepo {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
-    final response = await http.post(
-      Uri.parse('${Config.baseUrl}/profile/update'),
+    final response = await http.put(
+      Uri.parse('${Config.baseUrl}/profile/profile_update'),
       headers: {
         'accept': 'application/json',
         'Content-Type': 'application/json-patch+json',
@@ -63,7 +62,7 @@ class ProfileRepo {
     );
 
     if (response.statusCode == 200) {
-      return Profile.fromJson(jsonDecode(response.body));
+      return profile;
     } else if (response.statusCode == 401) {
       sessionCubit.showAtuh();
       throw Exception('Failed to load profile');

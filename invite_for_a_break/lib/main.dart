@@ -23,15 +23,16 @@ class MyApp extends StatelessWidget {
         primary: kPrimaryColor,
       )),
       home: Scaffold(
+          resizeToAvoidBottomInset: false,
           body: SafeArea(
-        child: RepositoryProvider(
-          create: (context) => AuthRepo(),
-          child: BlocProvider(
-              create: (context) =>
-                  SessionCubit(authRepo: context.read<AuthRepo>()),
-              child: SessionNavigator()),
-        ),
-      )),
+            child: RepositoryProvider(
+              create: (context) => AuthRepo(),
+              child: BlocProvider(
+                  create: (context) =>
+                      SessionCubit(authRepo: context.read<AuthRepo>()),
+                  child: SessionNavigator()),
+            ),
+          )),
     );
   }
 }
