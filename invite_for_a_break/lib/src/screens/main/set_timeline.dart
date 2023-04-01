@@ -57,6 +57,12 @@ class _SetTimeLineViewState extends State<SetTimeLineView> {
           body: SfCalendar(
             view: CalendarView.day,
             dataSource: MeetingDataSource(_getDataSource()),
+            // set start limit to 8 am
+            minDate: DateTime(
+                _selectedDate.year, _selectedDate.month, _selectedDate.day, 8),
+            // set end limit to 8 pm
+            maxDate: DateTime(
+                _selectedDate.year, _selectedDate.month, _selectedDate.day, 16),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
