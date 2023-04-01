@@ -40,7 +40,7 @@ class MainNavigator extends StatelessWidget {
               child: RepositoryProvider(
                 create: (context) =>
                     ProfileRepo(sessionCubit: context.read<SessionCubit>()),
-                child: ProfileView(),
+                child: ProfileView(null),
               ),
             ),
         ],

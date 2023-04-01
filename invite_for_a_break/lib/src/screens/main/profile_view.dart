@@ -6,14 +6,15 @@ import 'package:invite_for_a_break/src/bloc/profile/profile_state.dart';
 import 'package:invite_for_a_break/src/repository/profile_repo.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({Key? key}) : super(key: key);
+  final int? userId;
+  const ProfileView(id, {Key? key, this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProfileBloc(
         profileRepo: context.read<ProfileRepo>(),
-      )..add(ProfileLoading(userId: null)),
+      )..add(ProfileLoading(userId: userId)),
       child: Scaffold(
         body: _form(),
         floatingActionButton: _saveChangesButton(),
