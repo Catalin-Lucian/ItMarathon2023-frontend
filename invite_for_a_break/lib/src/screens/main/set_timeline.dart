@@ -57,6 +57,7 @@ class _SetTimeLineViewState extends State<SetTimeLineView> {
           body: SfCalendar(
             view: CalendarView.day,
             dataSource: MeetingDataSource(_getDataSource()),
+
             // set start limit to 8 am
             minDate: DateTime(
                 _selectedDate.year, _selectedDate.month, _selectedDate.day, 8),
