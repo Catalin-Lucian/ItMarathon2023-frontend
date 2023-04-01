@@ -56,8 +56,10 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
-          initialValue: state.firstName,
+          autofocus: false,
           decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintText: state.firstName,
             label: Text("First Name"),
             border: OutlineInputBorder(),
           ),
@@ -73,8 +75,9 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
-          initialValue: state.lastName,
           decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintText: state.lastName,
             label: Text("Last Name"),
             border: OutlineInputBorder(),
           ),
@@ -90,8 +93,9 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
-          initialValue: state.departament,
           decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintText: state.departament,
             label: Text("Department Name"),
             border: OutlineInputBorder(),
           ),
@@ -107,8 +111,9 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
-          initialValue: state.oficeName,
           decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintText: state.oficeName,
             label: Text("Office Name"),
             border: OutlineInputBorder(),
           ),
@@ -124,8 +129,9 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
-          initialValue: state.teamName,
           decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintText: state.teamName,
             label: Text("Team Name"),
             border: OutlineInputBorder(),
           ),
@@ -141,9 +147,10 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
-          initialValue: state.floorNumber,
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintText: state.floorNumber,
             label: Text("Floor Number"),
             border: OutlineInputBorder(),
           ),

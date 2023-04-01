@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invite_for_a_break/src/bloc/session/session_cubit.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -10,7 +12,9 @@ class HomeView extends StatelessWidget {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            context.read<SessionCubit>().signOut();
+          },
           backgroundColor: Colors.black,
           child: const Icon(Icons.logout),
         ),
