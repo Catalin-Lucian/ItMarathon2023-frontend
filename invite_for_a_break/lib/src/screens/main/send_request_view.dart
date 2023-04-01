@@ -87,7 +87,7 @@ class SendRequestView extends StatelessWidget {
     return FloatingActionButton.extended(
       onPressed: () {},
       backgroundColor: Colors.green,
-      label: Text("Save Changes"),
+      label: Text("Send Invite"),
     );
   }
 }

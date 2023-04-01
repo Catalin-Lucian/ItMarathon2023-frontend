@@ -50,7 +50,9 @@ class _SetTimeLineViewState extends State<SetTimeLineView> {
             // back button
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
-              onPressed: () {},
+              onPressed: () {
+                context.read<ProfileCubit>().gotoMain();
+              },
             ),
             title: Text("Set Timeline"),
           ),
