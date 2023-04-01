@@ -15,29 +15,33 @@ class ProfileView extends StatelessWidget {
         profileRepo: context.read<ProfileRepo>(),
       )..add(ProfileLoading(userId: null)),
       child: Scaffold(
-        body: Center(
-          child: ListView(
-            padding: EdgeInsets.all(20),
-            children: [
-              _profilePictureField(),
-              _gap(),
-              _firstNameField(),
-              _gap(),
-              _lastNameField(),
-              _gap(),
-              _departmentField(),
-              _gap(),
-              _officeNameField(),
-              _gap(),
-              _teamNameField(),
-              _gap(),
-              _floorNumberField(),
-              _gap(),
-              _setFreeTime(),
-            ],
-          ),
-        ),
+        body: _form(),
         floatingActionButton: _saveChangesButton(),
+      ),
+    );
+  }
+
+  Widget _form() {
+    return Center(
+      child: ListView(
+        padding: EdgeInsets.all(20),
+        children: [
+          _profilePictureField(),
+          _gap(),
+          _firstNameField(),
+          _gap(),
+          _lastNameField(),
+          _gap(),
+          _departmentField(),
+          _gap(),
+          _officeNameField(),
+          _gap(),
+          _teamNameField(),
+          _gap(),
+          _floorNumberField(),
+          _gap(),
+          _freeTime(),
+        ],
       ),
     );
   }
@@ -169,7 +173,7 @@ class ProfileView extends StatelessWidget {
     );
   }
 
-  Widget _setFreeTime() {
+  Widget _freeTime() {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return state.myProfile
@@ -177,7 +181,10 @@ class ProfileView extends StatelessWidget {
                 onPressed: () {},
                 child: Text("Set Free Time"),
               )
-            : _gap();
+            : ElevatedButton(
+                onPressed: () {},
+                child: Text("See Free Time"),
+              );
       },
     );
   }

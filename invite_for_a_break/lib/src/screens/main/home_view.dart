@@ -19,7 +19,6 @@ class HomeView extends StatelessWidget {
           child: const Icon(Icons.logout),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
     );
   }
 }
