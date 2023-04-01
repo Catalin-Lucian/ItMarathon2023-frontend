@@ -18,6 +18,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       try {
         final profile = await profileRepo.getProfile(event.userId);
         emit(state.copyWith(
+            hasChanged: false,
+            myProfile: event.userId == null,
             firstName: profile.firstName,
             lastName: profile.lastName,
             departament: profile.departament,
@@ -26,6 +28,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             floorNumber: profile.floorNumber,
             formStatus: InitialFormStatus()));
       } catch (e) {
+        // ignore: avoid_print
         print("Error: $e");
       }
       // profile image changed

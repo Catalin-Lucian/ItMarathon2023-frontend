@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:invite_for_a_break/config/config.dart';
 import 'package:invite_for_a_break/src/bloc/session/session_cubit.dart';

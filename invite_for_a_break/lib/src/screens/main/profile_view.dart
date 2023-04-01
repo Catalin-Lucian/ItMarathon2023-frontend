@@ -10,12 +10,12 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider(
-        create: (context) => ProfileBloc(
-          profileRepo: context.read<ProfileRepo>(),
-        )..add(ProfileLoading(userId: null)),
-        child: Center(
+    return BlocProvider(
+      create: (context) => ProfileBloc(
+        profileRepo: context.read<ProfileRepo>(),
+      )..add(ProfileLoading(userId: null)),
+      child: Scaffold(
+        body: Center(
           child: ListView(
             padding: EdgeInsets.all(20),
             children: [
@@ -32,10 +32,12 @@ class ProfileView extends StatelessWidget {
               _teamNameField(),
               _gap(),
               _floorNumberField(),
-              _saveChangesButton(),
+              _gap(),
+              _setFreeTime(),
             ],
           ),
         ),
+        floatingActionButton: _saveChangesButton(),
       ),
     );
   }
@@ -56,7 +58,7 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
-          autofocus: false,
+          readOnly: !state.myProfile,
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: state.firstName,
@@ -75,6 +77,7 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
+          readOnly: !state.myProfile,
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: state.lastName,
@@ -93,6 +96,7 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
+          readOnly: !state.myProfile,
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: state.departament,
@@ -111,6 +115,7 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
+          readOnly: !state.myProfile,
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: state.oficeName,
@@ -129,6 +134,7 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
+          readOnly: !state.myProfile,
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: state.teamName,
@@ -147,6 +153,7 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return TextFormField(
+          readOnly: !state.myProfile,
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -162,17 +169,33 @@ class ProfileView extends StatelessWidget {
     );
   }
 
+  Widget _setFreeTime() {
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        return state.myProfile
+            ? ElevatedButton(
+                onPressed: () {},
+                child: Text("Set Free Time"),
+              )
+            : _gap();
+      },
+    );
+  }
+
   Widget _saveChangesButton() {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        return ElevatedButton(
-          onPressed: () {
-            context.read<ProfileBloc>().add(
-                  ProfileSubmited(),
-                );
-          },
-          child: Text("Save Changes"),
-        );
+        return state.hasChanged
+            ? FloatingActionButton.extended(
+                onPressed: () {
+                  context.read<ProfileBloc>().add(
+                        ProfileSubmited(),
+                      );
+                },
+                backgroundColor: Colors.green,
+                label: Text("Save Changes"),
+              )
+            : _gap();
       },
     );
   }
