@@ -23,8 +23,10 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState> {
       emit(state.copyWith(searchString: event.searchString));
     } else if (event is HomepageSearch) {
       try {
-        final users = await homepageRepo.getUsers();
-        emit(state.copyWith(users: users));
+        final users = await homepageRepo.searchUsers(state.searchString);
+        List<String> searchHistory = [];
+        searchHistory.add(state.searchString);
+        emit(state.copyWith(users: users, searchHistory: searchHistory));
       } catch (e) {
         print("Error: $e");
       }
